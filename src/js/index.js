@@ -5,41 +5,39 @@ import "../assets/img/4geeks.ico";
 //import 'breathecode-dom'; //DOM override to make JS easier to use
 import "../style/index.scss";
 
-// window.isNumber = function isNumber() {
-//   let myCard = document.querySelector("#card");
-//   let cardValidation = myCard.value;
-
-//   if (isNaN(cardValidation)) {
-//     // return true;
-//     console.log(false);
-//   } else {
-//     // return false;
-//     console.log(true);
-//   }
-// };
-
 let myForm = document.querySelector("#ourForm"); //devuelve etiqueta form y todo su contenido
 
 let theSubmitVar = myForm.addEventListener("submit", canSubmit);
 
-function isCompleted(event) {
+function canSubmit(theSubmitVar) {
+  if (validCreditCard() == false) {
+    event.preventDefault(); //true
+    console.log(1); //hay alguno vacio
+  } else if (incompletedInputs().length !== 0) {
+    event.preventDefault(); //true
+    console.log(2);
+  }
+}
+
+function incompletedInputs(event) {
   let element = document.querySelectorAll(".form-control"); //devuelve array que incluye todos los input con clase form-control
-  //   console.log(element[0].value.length);
   let emptyInputs = [];
   for (let i = 0; i < element.length; i++) {
     if (element[i].value.length === 0) {
       emptyInputs.push(element[i]); //devuelve un array de todos los elementos con valor vacio
     }
   }
-  //   console.log(emptyInputs);
-  //   console.log(myForm);
-  //   console.log(element);
-  //   event.preventDefault();
   return emptyInputs;
 }
 
-function canSubmit(theSubmitVar) {
-  if (isCompleted().length !== 0) {
-    event.preventDefault();
+function validCreditCard(event) {
+  let myCard = document.querySelector("#card").value;
+  //   let cardValidation = myCard.value;
+  if (isNaN(myCard)) {
+    return false; //false en caso de que mycard no sea un numero
+    console.log(false);
+  } else {
+    return true;
+    console.log(true);
   }
 }
