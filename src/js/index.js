@@ -20,7 +20,9 @@ import "../style/index.scss";
 
 let myForm = document.querySelector("#ourForm"); //devuelve etiqueta form y todo su contenido
 
-myForm.addEventListener("submit", function isCompleted(event) {
+let theSubmitVar = myForm.addEventListener("submit", canSubmit);
+
+function isCompleted(event) {
   let element = document.querySelectorAll(".form-control"); //devuelve array que incluye todos los input con clase form-control
   //   console.log(element[0].value.length);
   let emptyInputs = [];
@@ -34,4 +36,10 @@ myForm.addEventListener("submit", function isCompleted(event) {
   //   console.log(element);
   //   event.preventDefault();
   return emptyInputs;
-});
+}
+
+function canSubmit(theSubmitVar) {
+  if (isCompleted().length !== 0) {
+    event.preventDefault();
+  }
+}
