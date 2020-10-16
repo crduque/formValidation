@@ -11,11 +11,20 @@ let theSubmitVar = myForm.addEventListener("submit", canSubmit);
 
 function canSubmit(theSubmitVar) {
   if (validCreditCard() == false) {
-    event.preventDefault(); //true
-    console.log(1); //hay alguno vacio
+    event.preventDefault(); //se para si credit card no es un numero
+    console.log(1);
   } else if (incompletedInputs().length !== 0) {
-    event.preventDefault(); //true
+    event.preventDefault(); //se para si hay algun input vacio
     console.log(2);
+  } else if (validCvc() == false) {
+    event.preventDefault(); //se para si cvc no es un numero
+    console.log(3);
+  } else if (validPCode() == false) {
+    event.preventDefault(); //se para si pcode no es un numero
+    console.log(4);
+  } else if (validAmount() == false) {
+    event.preventDefault(); //se para si amount no coincide con la expresion regular
+    console.log(5);
   }
 }
 
@@ -32,12 +41,43 @@ function incompletedInputs(event) {
 
 function validCreditCard(event) {
   let myCard = document.querySelector("#card").value;
-  //   let cardValidation = myCard.value;
   if (isNaN(myCard)) {
     return false; //false en caso de que mycard no sea un numero
-    console.log(false);
+  } else if (myCard.length != 16) {
+    return false; //false en caso de que mycard no sea 16
   } else {
     return true;
-    console.log(true);
+  }
+}
+
+function validCvc(event) {
+  let myCvc = document.querySelector("#cvc").value;
+  if (isNaN(myCvc)) {
+    return false; //false en caso de que myCvc no sea un numero
+  } else if (myCvc.length != 3) {
+    return false; //false en caso de que mycvc no sea 3
+  } else {
+    return true;
+  }
+}
+
+function validPCode(event) {
+  let myPCode = document.querySelector("#pcode").value;
+  if (isNaN(myPCode)) {
+    return false; //false en caso de que myPCode no sea un numero
+  } else if (myPCode.length != 5) {
+    return false; //false en caso de que myPCode no sea 3
+  } else {
+    return true;
+  }
+}
+
+function validAmount(event) {
+  let myAmount = document.querySelector("#amount").value;
+  let regularExpression = /^\d*(\.\d{0,2})?$/;
+  if (regularExpression.test(myAmount)) {
+    return true;
+  } else {
+    return false; //false en caso de que myAmount tenga mas de dos decimales
   }
 }
