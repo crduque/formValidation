@@ -14,31 +14,38 @@ function canSubmit(theSubmitVar) {
     event.preventDefault(); //se para si credit card no es un numero
     createAlert();
     console.log(1);
-  } else if (incompletedInputs().length !== 0) {
+  }
+  if (incompletedInputs().length !== 0) {
     event.preventDefault(); //se para si hay algun input vacio
     createAlert();
     console.log(2);
-  } else if (validCvc() == false) {
+  }
+  if (validCvc() == false) {
     event.preventDefault(); //se para si cvc no es un numero
     createAlert();
     console.log(3);
-  } else if (validPCode() == false) {
+  }
+  if (validPCode() == false) {
     event.preventDefault(); //se para si pcode no es un numero
     createAlert();
     console.log(4);
-  } else if (validAmount() == false) {
+  }
+  if (validAmount() == false) {
     event.preventDefault(); //se para si amount no coincide con la expresion regular
     createAlert();
     console.log(5);
-  } else if (validName() == false) {
+  }
+  if (validName() == false) {
     event.preventDefault(); //se para si amount no coincide con la expresion regular
     createAlert();
     console.log(6);
-  } else if (validLastName() == false) {
+  }
+  if (validLastName() == false) {
     event.preventDefault(); //se para si amount no coincide con la expresion regular
     createAlert();
     console.log(7);
-  } else if (validCity() == false) {
+  }
+  if (validCity() == false) {
     event.preventDefault(); //se para si amount no coincide con la expresion regular
     createAlert();
     console.log(8);
@@ -57,85 +64,101 @@ function incompletedInputs(event) {
 }
 
 function validCreditCard(event) {
-  let myCard = document.querySelector("#card").value;
-  if (isNaN(myCard)) {
+  let myCard = document.querySelector("#card");
+  if (isNaN(myCard.value)) {
+    myCard.classList.add("is-invalid");
     return false; //false en caso de que mycard no sea un numero
-  } else if (myCard.length != 16) {
+  } else if (myCard.value.length != 16) {
+    myCard.classList.add("is-invalid");
     return false; //false en caso de que mycard no sea 16
   } else {
+    myCard.classList.add("is-valid");
     return true;
   }
 }
 
 function validCvc(event) {
-  let myCvc = document.querySelector("#cvc").value;
-  if (isNaN(myCvc)) {
+  let myCvc = document.querySelector("#cvc");
+  if (isNaN(myCvc.value)) {
+    myCvc.classList.add("is-invalid");
     return false; //false en caso de que myCvc no sea un numero
-  } else if (myCvc.length != 3) {
+  } else if (myCvc.value.length != 3) {
+    myCvc.classList.add("is-invalid");
     return false; //false en caso de que mycvc no sea 3
   } else {
+    myCvc.classList.add("is-valid");
     return true;
   }
 }
 
 function validPCode(event) {
-  let myPCode = document.querySelector("#pcode").value;
-  if (isNaN(myPCode)) {
+  let myPCode = document.querySelector("#pcode");
+  if (isNaN(myPCode.value)) {
+    myPCode.classList.add("is-invalid");
     return false; //false en caso de que myPCode no sea un numero
-  } else if (myPCode.length != 5) {
+  } else if (myPCode.value.length != 5) {
+    myPCode.classList.add("is-invalid");
     return false; //false en caso de que myPCode no sea 3
   } else {
+    myPCode.classList.add("is-valid");
     return true;
   }
 }
 
 function validAmount(event) {
-  let myAmount = document.querySelector("#amount").value;
+  let myAmount = document.querySelector("#amount");
   let regularExpression = /^\d*(\.\d{0,2})?$/;
-  if (regularExpression.test(myAmount)) {
+  if (regularExpression.test(myAmount.value)) {
+    myAmount.classList.add("is-valid");
     return true;
   } else {
+    myAmount.classList.add("is-invalid");
     return false; //false en caso de que myAmount tenga mas de dos decimales
   }
 }
 
 function validName(event) {
-  let myName = document.querySelector("#name").value;
+  let myName = document.querySelector("#name");
   let regularExpression = /^[ñA-Za-z _]*[ñA-Za-z][ñA-Za-z _]*$/;
-  if (regularExpression.test(myName)) {
+  if (regularExpression.test(myName.value)) {
+    myName.classList.add("is-valid");
     return true;
   } else {
+    myName.classList.add("is-invalid");
     return false; //false en caso de que myName no sean solo letras
   }
 }
 
 function validLastName(event) {
-  let myLastName = document.querySelector("#lastname").value;
+  let myLastName = document.querySelector("#lastname");
   let regularExpression = /^[ñA-Za-z _]*[ñA-Za-z][ñA-Za-z _]*$/;
-  if (regularExpression.test(myLastName)) {
+  if (regularExpression.test(myLastName.value)) {
+    myLastName.classList.add("is-valid");
     return true;
   } else {
+    myLastName.classList.add("is-invalid");
     return false; //false en caso de que myLastName no sean solo letras
   }
 }
 
 function validCity(event) {
-  let myCity = document.querySelector("#city").value;
+  let myCity = document.querySelector("#city");
   let regularExpression = /^[ñA-Za-z _]*[ñA-Za-z][ñA-Za-z _]*$/;
-  if (regularExpression.test(myCity)) {
+  if (regularExpression.test(myCity.value)) {
+    myCity.classList.add("is-valid");
     return true;
   } else {
+    myCity.classList.add("is-invalid");
     return false; //false en caso de que myCity no sean solo letras
   }
 }
 
 function createAlert() {
-  console.log("Alert");
   let alert = document.querySelector(".card-body");
   let myFirstDiv = document.querySelector("#alert");
   if (myFirstDiv == null) {
     let myDiv = document.createElement("div");
-    myDiv.innerHTML = "<p>Something went wrong.</p>";
+    myDiv.innerHTML = "Something went wrong.";
     myDiv.classList.add("alert");
     myDiv.classList.add("alert-danger");
     alert.insertBefore(myDiv, alert.firstChild);
