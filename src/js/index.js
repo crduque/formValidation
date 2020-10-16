@@ -12,27 +12,35 @@ let theSubmitVar = myForm.addEventListener("submit", canSubmit);
 function canSubmit(theSubmitVar) {
   if (validCreditCard() == false) {
     event.preventDefault(); //se para si credit card no es un numero
+    createAlert();
     console.log(1);
   } else if (incompletedInputs().length !== 0) {
     event.preventDefault(); //se para si hay algun input vacio
+    createAlert();
     console.log(2);
   } else if (validCvc() == false) {
     event.preventDefault(); //se para si cvc no es un numero
+    createAlert();
     console.log(3);
   } else if (validPCode() == false) {
     event.preventDefault(); //se para si pcode no es un numero
+    createAlert();
     console.log(4);
   } else if (validAmount() == false) {
     event.preventDefault(); //se para si amount no coincide con la expresion regular
+    createAlert();
     console.log(5);
   } else if (validName() == false) {
     event.preventDefault(); //se para si amount no coincide con la expresion regular
+    createAlert();
     console.log(6);
   } else if (validLastName() == false) {
     event.preventDefault(); //se para si amount no coincide con la expresion regular
+    createAlert();
     console.log(7);
   } else if (validCity() == false) {
     event.preventDefault(); //se para si amount no coincide con la expresion regular
+    createAlert();
     console.log(8);
   }
 }
@@ -97,7 +105,7 @@ function validName(event) {
   if (regularExpression.test(myName)) {
     return true;
   } else {
-    return false; //false en caso de que myName sean solo letras
+    return false; //false en caso de que myName no sean solo letras
   }
 }
 
@@ -107,7 +115,7 @@ function validLastName(event) {
   if (regularExpression.test(myLastName)) {
     return true;
   } else {
-    return false; //false en caso de que myLastName sean solo letras
+    return false; //false en caso de que myLastName no sean solo letras
   }
 }
 
@@ -117,6 +125,21 @@ function validCity(event) {
   if (regularExpression.test(myCity)) {
     return true;
   } else {
-    return false; //false en caso de que myCity sean solo letras
+    return false; //false en caso de que myCity no sean solo letras
+  }
+}
+
+function createAlert() {
+  console.log("Alert");
+  let alert = document.querySelector(".card-body");
+  let myFirstDiv = document.querySelector("#alert");
+  if (myFirstDiv == null) {
+    let myDiv = document.createElement("div");
+    myDiv.innerHTML = "<p>Something went wrong.</p>";
+    myDiv.classList.add("alert");
+    myDiv.classList.add("alert-danger");
+    alert.insertBefore(myDiv, alert.firstChild);
+    myDiv.id = "alert";
+  } else {
   }
 }
