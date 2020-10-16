@@ -25,6 +25,15 @@ function canSubmit(theSubmitVar) {
   } else if (validAmount() == false) {
     event.preventDefault(); //se para si amount no coincide con la expresion regular
     console.log(5);
+  } else if (validName() == false) {
+    event.preventDefault(); //se para si amount no coincide con la expresion regular
+    console.log(6);
+  } else if (validLastName() == false) {
+    event.preventDefault(); //se para si amount no coincide con la expresion regular
+    console.log(7);
+  } else if (validCity() == false) {
+    event.preventDefault(); //se para si amount no coincide con la expresion regular
+    console.log(8);
   }
 }
 
@@ -79,5 +88,35 @@ function validAmount(event) {
     return true;
   } else {
     return false; //false en caso de que myAmount tenga mas de dos decimales
+  }
+}
+
+function validName(event) {
+  let myName = document.querySelector("#name").value;
+  let regularExpression = /^[ñA-Za-z _]*[ñA-Za-z][ñA-Za-z _]*$/;
+  if (regularExpression.test(myName)) {
+    return true;
+  } else {
+    return false; //false en caso de que myName sean solo letras
+  }
+}
+
+function validLastName(event) {
+  let myLastName = document.querySelector("#lastname").value;
+  let regularExpression = /^[ñA-Za-z _]*[ñA-Za-z][ñA-Za-z _]*$/;
+  if (regularExpression.test(myLastName)) {
+    return true;
+  } else {
+    return false; //false en caso de que myLastName sean solo letras
+  }
+}
+
+function validCity(event) {
+  let myCity = document.querySelector("#city").value;
+  let regularExpression = /^[ñA-Za-z _]*[ñA-Za-z][ñA-Za-z _]*$/;
+  if (regularExpression.test(myCity)) {
+    return true;
+  } else {
+    return false; //false en caso de que myCity sean solo letras
   }
 }
