@@ -13,42 +13,34 @@ function canSubmit(theSubmitVar) {
   if (validCreditCard() == false) {
     event.preventDefault(); //se para si credit card no es un numero
     createAlert();
-    console.log(1);
   }
   if (incompletedInputs().length !== 0) {
     event.preventDefault(); //se para si hay algun input vacio
     createAlert();
-    console.log(2);
   }
   if (validCvc() == false) {
     event.preventDefault(); //se para si cvc no es un numero
     createAlert();
-    console.log(3);
   }
   if (validPCode() == false) {
     event.preventDefault(); //se para si pcode no es un numero
     createAlert();
-    console.log(4);
   }
   if (validAmount() == false) {
     event.preventDefault(); //se para si amount no coincide con la expresion regular
     createAlert();
-    console.log(5);
   }
   if (validName() == false) {
     event.preventDefault(); //se para si amount no coincide con la expresion regular
     createAlert();
-    console.log(6);
   }
   if (validLastName() == false) {
     event.preventDefault(); //se para si amount no coincide con la expresion regular
     createAlert();
-    console.log(7);
   }
   if (validCity() == false) {
     event.preventDefault(); //se para si amount no coincide con la expresion regular
     createAlert();
-    console.log(8);
   }
 }
 
@@ -108,7 +100,7 @@ function validPCode(event) {
 function validAmount(event) {
   let myAmount = document.querySelector("#amount");
   let regularExpression = /^\d*(\.\d{0,2})?$/;
-  if (regularExpression.test(myAmount.value)) {
+  if (regularExpression.test(myAmount.value) && myAmount.value != "") {
     myAmount.classList.add("is-valid");
     return true;
   } else {
